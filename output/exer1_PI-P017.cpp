@@ -60,7 +60,7 @@ int main (){
 
     for (int i = 0; i < 3; i++){
         double distancia = pontos [i].distanciaPontosOrigem();
-        cout << "Distancia do ponto " << i + 1 << ": " << distancia << endl;
+        cout << "Distancia do ponto: " << i + 1 << ": " << distancia << endl;
     }
 
 return 0;
