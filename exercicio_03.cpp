@@ -30,9 +30,27 @@ public:
 
 class Estoque {
 private:
-    // implementar
+    map<int, int> quantidadeProdutos;
+
 public:
-    // implementar
+    void adicionarProduto(const Produto& produto, int quantidade) {
+        quantidadeProdutos[produto.getCodigo()] += quantidade;
+    }
+
+    void removerProduto(const Produto& produto, int quantidade) {
+        quantidadeProdutos[produto.getCodigo()] -= quantidade;
+        if (quantidadeProdutos[produto.getCodigo()] < 0) {
+            quantidadeProdutos[produto.getCodigo()] = 0;
+        }
+    }
+
+    int getQuantidadeProduto(const Produto& produto) const {
+        auto it = quantidadeProdutos.find(produto.getCodigo());
+        if (it != quantidadeProdutos.end()) {
+            return it->second;
+        }
+        return 0;
+    }
 };
 
 class CarrinhoDeCompras {
@@ -44,7 +62,12 @@ public:
 };
 
 int main() {
-    //implementar
+
+    Produto p1("Maçã", 2.5, 1);
+    Produto p2("Arroz", 10.0, 2);
+    Produto p3("Leite", 4.0, 3);
+
+
 
     return 0;
 }
