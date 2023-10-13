@@ -110,12 +110,38 @@ public:
 };
 
 int main() {
-
     Produto p1("Maçã", 2.5, 1);
     Produto p2("Arroz", 10.0, 2);
     Produto p3("Leite", 4.0, 3);
 
+    CarrinhoDeCompras carrinho;
+    carrinho.adicionarProduto(p1, 3);
+    carrinho.adicionarProduto(p2, 2);
+    carrinho.adicionarProduto(p3, 1);
 
+    double valorTotal = carrinho.calcularValorTotal();
+    cout << "Valor total da compra: " << valorTotal << endl;
 
+    carrinho.removerProduto(p2, 1);
+    valorTotal = carrinho.calcularValorTotal();
+    cout << "Valor total após remoção: " << valorTotal << endl;
+
+    carrinho.esvaziarCarrinho();
+    valorTotal = carrinho.calcularValorTotal();
+    cout << "Valor total após esvaziar o carrinho: " << valorTotal << endl;
+
+    Produto p4("Chocolate", 3.0, 4);
+    carrinho.adicionarProduto(p4, 10);
+
+    int quantidadeChocolate = carrinho.getQuantidadeProduto(p4);
+    cout << "Quantidade de chocolates no carrinho: " << quantidadeChocolate << endl;
+
+    carrinho.adicionarProduto(p1, 2);
+    carrinho.adicionarProduto(p2, 3);
+    carrinho.adicionarProduto(p3, 1);
+    carrinho.adicionarProduto(p4, 2);
+
+    carrinho.exibirCarrinho();
     return 0;
+
 }
