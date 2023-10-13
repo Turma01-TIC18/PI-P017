@@ -55,10 +55,58 @@ public:
 
 class CarrinhoDeCompras {
 private:
-    //implementar
+    vector<pair<Produto, int>> itensCarrinho;
 
 public:
-    // implementar
+    void adicionarProduto(const Produto& produto, int quantidade) {
+        for (auto& item : itensCarrinho) {
+            if (item.first.getCodigo() == produto.getCodigo()) {
+                item.second += quantidade;
+                return;
+            }
+        }
+        itensCarrinho.push_back(make_pair(produto, quantidade));
+    }
+
+    void removerProduto(const Produto& produto, int quantidade) {
+        for (auto& item : itensCarrinho) {
+            if (item.first.getCodigo() == produto.getCodigo()) {
+                item.second -= quantidade;
+                if (item.second < 0) {
+                    item.second = 0;
+                }
+                return;
+            }
+        }
+    }
+
+    double calcularValorTotal() const {
+        double valorTotal = 0.0;
+        for (const auto& item : itensCarrinho) {
+            valorTotal += item.first.getPreco() * item.second;
+        }
+        return valorTotal;
+    }
+
+    void esvaziarCarrinho() {
+        itensCarrinho.clear();
+    }
+
+    int getQuantidadeProduto(const Produto& produto) const {
+        for (const auto& item : itensCarrinho) {
+            if (item.first.getCodigo() == produto.getCodigo()) {
+                return item.second;
+            }
+        }
+        return 0;
+    }
+
+    void exibirCarrinho() const {
+        cout << "Carrinho de Compras:" << endl;
+        for (const auto& item : itensCarrinho) {
+            cout << "- " << item.first.getNome() << " (" << item.first.getPreco() << ") x " << item.second << endl;
+        }
+    }
 };
 
 int main() {
