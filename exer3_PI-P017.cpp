@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <iomanip>
 
 using namespace std;
 
@@ -60,11 +61,11 @@ class CarrinhoDeCompras : public Produto {
         produtoCarrinho.push_back(_produto);
     }
 
-    void excluirProduto(Produto _produto){
+    void excluirProduto(Produto produto){
         //to do
     }
 
-    double calcularPrecoCarrinho(Produto _produto){
+    double calcularPrecoCarrinho(Produto produto){
         double totalPreco = 0;
         for (Produto produto : produtoCarrinho){
             totalPreco += produto.getPreco();
@@ -75,7 +76,7 @@ class CarrinhoDeCompras : public Produto {
     void exibirConteudoCarrinho(){
         for(Produto produto : produtoCarrinho){
            cout << "Produto: " << produto.getNome() << "Preco: "
-           << produto.getPreco() << endl;
+           << fixed << setprecision(1) << produto.getPreco() << endl;
         }
 
     }
@@ -85,9 +86,17 @@ class CarrinhoDeCompras : public Produto {
 
 int main (){
 
-/*Produto p1("Maca", 2.5);
-Produto p2("Arroz", 10.0);
-Produto p3("Leite", 4.0);*/
+Produto p1("Maca", 2.5, "AAA");
+Produto p2("Arroz", 10.0, "BBB");
+Produto p3("Leite", 4.0, "CCC");
+
+cout << "Produto p1(''" << p1.getNome() << "'', " << fixed 
+<< setprecision(1) << p1.getPreco() << ");" << endl;
+cout << "Produto p1(''" << p2.getNome() << "'', "  << fixed 
+<< setprecision(1) << p2.getPreco() << ");" << endl;
+cout << "Produto p1(''" << p3.getNome() << "'', "  << fixed 
+<< setprecision(1) << p3.getPreco() << ");" << endl;
+
 
 
 return 0;
