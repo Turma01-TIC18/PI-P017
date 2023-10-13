@@ -52,6 +52,7 @@ int main(){
     Ponto p2(-2.0,7.0);
     Ponto p3(0.0,3.0);
     Ponto p4(4.0,0.0);
+    Ponto p5;
     
     double distancia_p1 = p1.calcularDistancia();
 
@@ -76,5 +77,11 @@ int main(){
     cout << "A distância do ponto (1,1) até a origem é aproximadamente " << distancia_p2 << endl;
     cout << "A distância do ponto (0,3) até a origem é aproximadamente " << distancia_p3 << endl;
     cout << "A distância do ponto (4,0) até a origem é aproximadamente " << distancia_p4 << endl;
+    cout << "Coordenadas do ponto p5: ("<< p5.getX() << ", " << p5.getY() << ")" << endl;
+
+    p5.setCoordenadas(8,-3);
+
+    cout << "Novas coordenadas do ponto p5: ("<< p5.getX() << ", " << p5.getY() << ")" << endl;
+    
     return 0;
 } 
