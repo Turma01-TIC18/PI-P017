@@ -7,23 +7,29 @@
 using namespace std;
 
 class Produto {
+
 private:
     string nome;
     double preco;
     int codigo;
 
 public:
-    Produto(const string& nome, double preco, int codigo) : nome(nome), preco(preco), codigo(codigo) {}
+    Produto(string _nome, double _preco, int _codigo){ 
+        nome = _nome;
+        preco = _preco;
+        codigo = _codigo;
 
-    string getNome() const {
+    }
+
+    string getNome() {
         return nome;
     }
 
-    double getPreco() const {
+    double getPreco() {
         return preco;
     }
 
-    int getCodigo() const {
+    int getCodigo() {
         return codigo;
     }
 };
@@ -33,18 +39,18 @@ private:
     map<int, int> quantidadeProdutos;
 
 public:
-    void adicionarProduto(const Produto& produto, int quantidade) {
+    void adicionarProduto( Produto& produto, int quantidade) {
         quantidadeProdutos[produto.getCodigo()] += quantidade;
     }
 
-    void removerProduto(const Produto& produto, int quantidade) {
+    void removerProduto(Produto& produto, int quantidade) {
         quantidadeProdutos[produto.getCodigo()] -= quantidade;
         if (quantidadeProdutos[produto.getCodigo()] < 0) {
             quantidadeProdutos[produto.getCodigo()] = 0;
         }
     }
 
-    int getQuantidadeProduto(const Produto& produto) const {
+    int getQuantidadeProduto(Produto& produto) const {
         auto it = quantidadeProdutos.find(produto.getCodigo());
         if (it != quantidadeProdutos.end()) {
             return it->second;
@@ -58,7 +64,7 @@ private:
     vector<pair<Produto, int>> itensCarrinho;
 
 public:
-    void adicionarProduto(const Produto& produto, int quantidade) {
+    void adicionarProduto(Produto& produto, int quantidade) {
         for (auto& item : itensCarrinho) {
             if (item.first.getCodigo() == produto.getCodigo()) {
                 item.second += quantidade;
@@ -68,7 +74,7 @@ public:
         itensCarrinho.push_back(make_pair(produto, quantidade));
     }
 
-    void removerProduto(const Produto& produto, int quantidade) {
+    void removerProduto(Produto& produto, int quantidade) {
         for (auto& item : itensCarrinho) {
             if (item.first.getCodigo() == produto.getCodigo()) {
                 item.second -= quantidade;
@@ -80,9 +86,9 @@ public:
         }
     }
 
-    double calcularValorTotal() const {
+    double calcularValorTotal() {
         double valorTotal = 0.0;
-        for (const auto& item : itensCarrinho) {
+        for (auto& item : itensCarrinho) {
             valorTotal += item.first.getPreco() * item.second;
         }
         return valorTotal;
@@ -92,8 +98,8 @@ public:
         itensCarrinho.clear();
     }
 
-    int getQuantidadeProduto(const Produto& produto) const {
-        for (const auto& item : itensCarrinho) {
+    int getQuantidadeProduto(Produto& produto) {
+        for (auto& item : itensCarrinho) {
             if (item.first.getCodigo() == produto.getCodigo()) {
                 return item.second;
             }
@@ -101,9 +107,9 @@ public:
         return 0;
     }
 
-    void exibirCarrinho() const {
+    void exibirCarrinho() {
         cout << "Carrinho de Compras:" << endl;
-        for (const auto& item : itensCarrinho) {
+        for (auto& item : itensCarrinho) {
             cout << "- " << item.first.getNome() << " (" << item.first.getPreco() << ") x " << item.second << endl;
         }
     }
